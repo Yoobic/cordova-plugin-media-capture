@@ -360,21 +360,11 @@ NSNumber *globalHeight;
 - (CDVPluginResult*)processVideo:(NSString*)moviePath forCallbackId:(NSString*)callbackId
 {
     // save the movie to photo album (only avail as of iOS 3.1)
-
-    /* don't need, it should automatically get saved
-
-    if (&UIVideoAtPathIsCompatibleWithSavedPhotosAlbum != NULL && UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(moviePath) == YES) {
-        NSLog(@"try to save movie");
-        UISaveVideoAtPathToSavedPhotosAlbum(moviePath, nil, nil, nil);
-        NSLog(@"finished saving movie");
-    }*/
-    if (&UIVideoAtPathIsCompatibleWithSavedPhotosAlbum != NULL && UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(moviePath) == YES) {
-        NSLog(@"try to save movie");
-        UISaveVideoAtPathToSavedPhotosAlbum(moviePath, nil, nil, nil);
-        NSLog(@"finished saving movie");
+    if([globalSaveToPhotoAlbum isEqual:@1]) {
+        if (&UIVideoAtPathIsCompatibleWithSavedPhotosAlbum != NULL && UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(moviePath) == YES) {
+            UISaveVideoAtPathToSavedPhotosAlbum(moviePath, nil, nil, nil);
+        }
     }
-    NSLog(@"can save %@: %d ?", moviePath, UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(moviePath));
-
     // create MediaFile object
     NSDictionary* fileDict = [self getMediaDictionaryFromPath:moviePath ofType:nil];
     NSArray* fileArray = [NSArray arrayWithObject:fileDict];

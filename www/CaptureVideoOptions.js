@@ -29,6 +29,10 @@ var CaptureVideoOptions = function () {
     this.duration = 0;
     // Video quality parameter, 0 means low quality, suitable for MMS messages, and value 1 means high quality. Defaults to medium quality in iOS, if set to null.
     this.quality = 1;
+    
+    // Save videos to album/camera roll
+    this.saveToPhotoAlbum = true;
+
 };
 
 module.exports = CaptureVideoOptions;
