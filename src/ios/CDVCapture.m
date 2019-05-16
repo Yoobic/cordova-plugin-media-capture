@@ -291,7 +291,11 @@ NSNumber *globalHeight;
     // taking more than one video (limit) is only supported if provide own controls via cameraOverlayView property
     NSNumber* duration = [options objectForKey:@"duration"];
     NSNumber* quality = [options objectForKey:@"quality"];
+    NSNumber* saveToPhotoAlbum = [options objectForKey:@"saveToPhotoAlbum"];
+
     NSString* mediaType = nil;
+
+    globalSaveToPhotoAlbum = saveToPhotoAlbum;
 
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         // there is a camera, it is available, make sure it can do movies
