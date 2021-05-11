@@ -685,7 +685,7 @@ NSNumber *globalHeight;
 
 @end
 
-@interface CDVAudioRecorderViewController () {
+@interface CDVAudioRecorderViewController () <UIAdaptivePresentationControllerDelegate> {
     UIStatusBarStyle _previousStatusBarStyle;
 }
 @end
@@ -733,6 +733,9 @@ NSNumber *globalHeight;
 	if ([self respondsToSelector:@selector(edgesForExtendedLayout)]) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+
+   // Add delegate to catch the dismiss event
+    self.navigationController.presentationController.delegate = self;
 
     // create view and display
     CGRect viewRect = [[UIScreen mainScreen] applicationFrame];
@@ -991,6 +994,10 @@ NSNumber *globalHeight;
     if (IsAtLeastiOSVersion(@"7.0")) {
         [[UIApplication sharedApplication] setStatusBarStyle:_previousStatusBarStyle];
     }
+}
+
+- (void)presentationControllerDidDismiss:(UIPresentationController *)presentationController {
+    [self dismissAudioView:nil];
 }
 
 - (void)updateTime
